@@ -1,5 +1,6 @@
 use egg_api::presentation;
 
-fn main() {
-    presentation::api();
+#[tokio::main]
+async fn main() {
+    presentation::api().await;
 }
