@@ -29,7 +29,7 @@ pub async fn api() -> ExitCode {
 async fn serve(app: Router) -> Result<(), std::io::Error> {
     let socket = TcpListener::bind(ADDR).await.unwrap();
     axum::serve(socket, app)
-        .with_graceful_shutdown(setup::shutdown_signal())
+        .with_graceful_shutdown(setup::get_shutdown_signal())
         .await
 }
 

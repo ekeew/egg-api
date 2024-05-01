@@ -16,6 +16,6 @@ pub fn create_app() -> Router {
         .route("/", routing::get(endpoints::root()))
 }
 
-pub async fn shutdown_signal() {
+pub async fn get_shutdown_signal() {
     signal::ctrl_c().await.unwrap();
 }
