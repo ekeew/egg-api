@@ -1,7 +1,11 @@
 [package]
 name = "egg-api"
 version = "0.1.0"
+authors = [ "Yarik <ekeew@proton.me>" ]
 edition = "2021"
+readme = "README.md"
+repository = "https://github.com/ekeew/egg-api.git"
+license = "GPL-3.0-or-later"
 
 [dependencies]
 axum = "0.7"
