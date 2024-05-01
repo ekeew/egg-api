@@ -1,8 +1,10 @@
 use std::process::ExitCode;
 
-use axum::Router;
-use tokio::{net::TcpListener, signal};
+use axum::{routing, Router};
+use tokio::{signal, net::TcpListener};
 use tracing_subscriber::{prelude::*, filter::LevelFilter};
+
+mod endpoints;
 
 const ADDR: &str = "127.0.0.1:8080";
 
@@ -33,6 +35,7 @@ fn setup_logging() {
 
 fn create_app() -> Router {
     Router::new()
+        .route("/", routing::get(endpoints::root()))
 }
 
 async fn serve(app: Router) -> Result<(), std::io::Error> {
