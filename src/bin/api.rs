@@ -1,3 +1,5 @@
+use egg_api::presentation;
+
 fn main() {
-    println!("Hello, egg!");
+    presentation::api();
 }
