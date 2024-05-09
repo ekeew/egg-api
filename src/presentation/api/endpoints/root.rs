@@ -1,3 +1,3 @@
-pub fn root() -> &'static str {
+pub fn root_handler() -> &'static str {
     "Hello, egg!"
 }

@@ -13,7 +13,7 @@ pub fn run_logging() {
 
 pub fn create_app() -> Router {
     Router::new()
-        .route("/", routing::get(endpoints::root()))
+        .route("/", routing::get(endpoints::root_handler()))
 }
 
 pub async fn get_shutdown_signal() {
