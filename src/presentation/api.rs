@@ -15,6 +15,7 @@ pub async fn api() -> ExitCode {
     let app = setup::create_app();
 
     tracing::info!("Starting server...");
+    tracing::warn!("Be careful with eggs!");
     let result = serve(app).await;
     tracing::info!("Server stopped");
 
