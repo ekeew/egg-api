@@ -3,6 +3,7 @@ use std::process::ExitCode;
 use axum::Router;
 use tokio::net::TcpListener;
 
+mod config;
 mod endpoints;
 mod setup;
 
