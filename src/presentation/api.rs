@@ -5,10 +5,11 @@ use tokio::net::TcpListener;
 
 mod config;
 mod endpoints;
+mod errors;
 mod setup;
 
 pub async fn api() -> ExitCode {
-    let config = setup::read_config();
+    let Ok(config) = setup::read_config() else { return ExitCode::FAILURE };
     setup::run_logging();
 
     tracing::info!("Initializing...");

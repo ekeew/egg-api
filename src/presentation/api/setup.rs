@@ -4,8 +4,8 @@ use axum::{routing, Router};
 use tokio::signal;
 use tracing_subscriber::{prelude::*, filter::LevelFilter};
 
-use super::endpoints;
-use super::config::{self, Config};
+use super::{endpoints, errors::AppError};
+use super::config::{self, Args, Config};
 
 pub fn run_logging() {
     tracing_subscriber::registry()
@@ -14,9 +14,9 @@ pub fn run_logging() {
         .init();
 }
 
-pub fn read_config() -> Config {
-    let args = config::parse_args(env::args());
-    let conf_file = fs::read_to_string(args.config).unwrap();
+pub fn read_config() -> Result<Config, AppError> {
+    let args: Args = config::parse_args(env::args())?;
+    let conf_file = fs::read_to_string(args.config).map_err(|_| AppError::ParsingError)?;
     config::parse_config(conf_file)
 }
 
