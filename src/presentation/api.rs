@@ -1,4 +1,4 @@
-use std::process::ExitCode;
+use std::{net::SocketAddr, process::ExitCode};
 
 use axum::Router;
 use tokio::net::TcpListener;
@@ -7,9 +7,8 @@ mod config;
 mod endpoints;
 mod setup;
 
-const ADDR: &str = "127.0.0.1:8080";
-
 pub async fn api() -> ExitCode {
+    let config = setup::read_config();
     setup::run_logging();
 
     tracing::info!("Initializing...");
@@ -17,7 +16,7 @@ pub async fn api() -> ExitCode {
 
     tracing::info!("Starting server...");
     tracing::warn!("Be careful with eggs!");
-    let result = serve(app).await;
+    let result = serve(app, config.addr).await;
     tracing::info!("Server stopped");
 
     if let Err(e) = result {
@@ -28,8 +27,8 @@ pub async fn api() -> ExitCode {
     }
 }
 
-async fn serve(app: Router) -> Result<(), std::io::Error> {
-    let socket = TcpListener::bind(ADDR).await.unwrap();
+async fn serve(app: Router, addr: SocketAddr) -> Result<(), std::io::Error> {
+    let socket = TcpListener::bind(addr).await.unwrap();
     axum::serve(socket, app)
         .with_graceful_shutdown(setup::get_shutdown_signal())
         .await
