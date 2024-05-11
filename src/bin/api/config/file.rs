@@ -2,7 +2,7 @@ use std::net::SocketAddr;
 
 use serde::Deserialize;
 
-use crate::presentation::api::AppError;
+use crate::errors::AppError;
 
 #[derive(Deserialize)]
 pub struct Config {

@@ -4,9 +4,9 @@ use axum::{routing, Router};
 use tokio::signal;
 use tracing_subscriber::{prelude::*, filter::LevelFilter};
 
-use crate::presentation::api::{
+use crate::{
     endpoints,
-    AppError,
+    errors::AppError,
     config::{self, Config},
 };
 

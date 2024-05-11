@@ -3,9 +3,13 @@ use std::{net::SocketAddr, process::ExitCode};
 use axum::Router;
 use tokio::net::TcpListener;
 
-use super::setup;
+mod config;
+mod endpoints;
+mod errors;
+mod setup;
 
-pub async fn api() -> ExitCode {
+#[tokio::main]
+async fn main() -> ExitCode {
     let config = match setup::read_config() {
         Ok(config) => config,
         Err(e) => {
